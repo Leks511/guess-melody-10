@@ -6,9 +6,10 @@ import { QuestionGenre, UserGenreQuestionAnswer } from '../../types/question';
 type GenreQuestionScreenProps = {
   question: QuestionGenre;
   onAnswer: (question: QuestionGenre, answers: UserGenreQuestionAnswer) => void;
+  renderPlayer: (src: string, playerIndex: number) => JSX.Element;
 };
 
-function GenreQuestionScreen({question, onAnswer}: GenreQuestionScreenProps): JSX.Element {
+function GenreQuestionScreen({question, onAnswer, renderPlayer}: GenreQuestionScreenProps): JSX.Element {
   const {answers, genre} = question;
 
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
@@ -47,12 +48,7 @@ function GenreQuestionScreen({question, onAnswer}: GenreQuestionScreenProps): JS
             const keyValue = `${id}-${answer.src}`;
             return (
               <div key={keyValue} className="track">
-                <button className="track__button track__button--play" type="button"/>
-                <div className="track__status">
-                  <audio
-                    src={answer.src}
-                  />
-                </div>
+                {renderPlayer(answer.src, id)}
                 <div className="game__answer">
                   <input
                     className="game__input visually-hidden"
