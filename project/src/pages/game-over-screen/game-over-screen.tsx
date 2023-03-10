@@ -1,6 +1,10 @@
 import {Helmet} from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 function GameOverScreen(): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <section className="result">
       <Helmet>
@@ -14,6 +18,7 @@ function GameOverScreen(): JSX.Element {
       <button
         className="replay"
         type="button"
+        onClick={() => navigate(AppRoute.Root)}
       >
         Попробовать ещё раз
       </button>
